@@ -21,6 +21,7 @@ class RegistrationController extends Controller
             'password' => bcrypt($attributes['password']),
         ]);
         event(new Registered($attributes));
+        auth()->login($attributes);
         return response()->json(['message' => 'Registered Successfully!']);
     }
 

@@ -16,8 +16,8 @@ class AuthServiceProvider extends ServiceProvider
             $frontURL = 'http://localhost:3000?email_verify_url='.$url;
             return (new MailMessage())
             ->subject('Please verify your email address')
-            ->line('Click the button to verify')
-            ->action('Verify account', $frontURL);
+            ->theme('custom')
+            ->markdown('emails.index', ['frontURL' => $frontURL, 'notifiable' => $notifiable]);
         });
     }
 }
