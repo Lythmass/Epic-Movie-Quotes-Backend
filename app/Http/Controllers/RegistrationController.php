@@ -14,6 +14,7 @@ class RegistrationController extends Controller
 {
     public function store(StoreUserRequest $request)
     {
+        app()->setLocale($request['locale']);
         $attributes = $request->validated();
         $attributes = User::create([
             'name' => $attributes['name'],
