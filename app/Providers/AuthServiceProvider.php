@@ -14,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
-            $frontURL = 'http://localhost:3000/'.app()->getLocale().'?email_verify_url='.$url;
+            $frontURL = env('FRONT_APP_URL').app()->getLocale().'?email_verify_url='.$url;
             return (new MailMessage())
             ->subject('Please verify your email address')
             ->theme('custom')
@@ -23,7 +23,7 @@ class AuthServiceProvider extends ServiceProvider
 
         ResetPassword::toMailUsing(function ($notifiable, $url) {
             $email = $notifiable->getEmailForPasswordReset();
-            $frontURL = 'http://localhost:3000/'.app()->getLocale().'?reset_token='.$url.'&email='.$email;
+            $frontURL = env('FRONT_APP_URL').app()->getLocale().'?reset_token='.$url.'&email='.$email;
             return (new MailMessage())
             ->theme('custom')
             ->subject('Password Reset')
