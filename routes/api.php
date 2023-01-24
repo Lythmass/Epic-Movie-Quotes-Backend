@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GoogelAuthController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Http\Request;
@@ -16,6 +18,9 @@ Route::middleware(['guest'])->group(function () {
 
     Route::post('/forgot', [PasswordResetController::class, 'send']);
     Route::post('/reset', [PasswordResetController::class, 'update']);
+
+    Route::get('/google/redirect', [GoogleAuthController::class, 'index']);
+    Route::get('/google/callback', [GoogleAuthController::class, 'store']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
