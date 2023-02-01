@@ -23,4 +23,11 @@ class EmailsController extends Controller
             return response()->json(['message' => 'Email added successfully!']);
         }
     }
+
+    public function destroy(Request $request)
+    {
+        $email = $request['email'];
+        Email::where('email', $email)->delete();
+        return response()->json(['message' => 'Successfully removed email.']);
+    }
 }
