@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProfileController;
@@ -27,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/email/verify', [RegistrationController::class, 'sendEmailVerificationRequest']);
     Route::get('/get-user-data', [ProfileController::class, 'sendUserData']);
     Route::post('/post-user-data', [ProfileController::class, 'store']);
+    Route::post('/add-new-email', [EmailsController::class, 'store']);
 });
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');
