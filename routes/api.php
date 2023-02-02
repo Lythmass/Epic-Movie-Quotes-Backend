@@ -33,3 +33,4 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');
+Route::get('/secondary-email/verify/{id}/{hash}/{email}', [EmailsController::class, 'verifyEmail']);
