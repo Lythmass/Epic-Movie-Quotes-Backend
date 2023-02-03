@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\VerifySecondaryEmail;
 use App\Models\Email;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class EmailsController extends Controller
 {
@@ -20,7 +23,28 @@ class EmailsController extends Controller
                 'user_id' => $userId,
                 'email' => $email
             ]);
+            $token = sha1($email);
+            app()->setLocale($request['locale']);
+            Mail::to($email)->send(new VerifySecondaryEmail($userId, $email, $token));
             return response()->json(['message' => 'Email added successfully!']);
+        }
+    }
+
+    public function verifyEmail(Request $request)
+    {
+        auth()->loginUsingId($request->route('id'));
+        $token = $request->route('hash');
+        $email = $request->route('email');
+        $user = auth()->user()->emails->where('email', $email)->first();
+        if ($user->email_verified_at !== null) {
+            return response()->json(['message' => 'Your email has been verified already']);
+        }
+        if (sha1($email) === $token) {
+            $user->email_verified_at = now();
+            $user->save();
+            return response()->json(['message' => 'Your email was verified successfully!']);
+        } else {
+            throw new AuthorizationException();
         }
     }
 
