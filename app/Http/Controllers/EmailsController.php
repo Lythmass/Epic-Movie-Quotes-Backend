@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\VerifySecondaryEmail;
 use App\Models\Email;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -46,6 +47,21 @@ class EmailsController extends Controller
         } else {
             throw new AuthorizationException();
         }
+    }
+
+    public function update(Request $request)
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        $email = $request['email'];
+        $secondaryEmails = $user->emails->where('email', $email)->first();
+        $verificationDate = $secondaryEmails->email_verified_at;
+        $secondaryEmails->email = $user->email;
+        $secondaryEmails->email_verified_at = $user->email_verified_at;
+        $secondaryEmails->save();
+        $user->email = $email;
+        $user->email_verified_at = $verificationDate;
+        $user->save();
+        return response()->json(['message' => 'Your was successfully changed!']);
     }
 
     public function destroy(Request $request)
