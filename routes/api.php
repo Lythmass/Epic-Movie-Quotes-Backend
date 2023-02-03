@@ -5,6 +5,7 @@ use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfilePictureController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/add-new-email', [EmailsController::class, 'store']);
     Route::post('/delete-email', [EmailsController::class, 'destroy']);
     Route::post('/change-primary-email', [EmailsController::class, 'update']);
+    Route::post('/upload-photo', [ProfilePictureController::class, 'store']);
 });
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');
