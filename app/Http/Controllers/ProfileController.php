@@ -23,6 +23,6 @@ class ProfileController extends Controller
         }
         $user->name = $request['username'];
         $user->save();
-        return response()->json(['message' => 'Successfully changed data!']);
+        return response()->json(['message' => 'responses.update']);
     }
 }
