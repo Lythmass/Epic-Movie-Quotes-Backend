@@ -18,7 +18,7 @@ class EmailsController extends Controller
         $email = $request['email'];
         $emailExists = Email::where('email', $email)->exists();
         if ($emailExists) {
-            return response(['message' => 'Email is registered already!'], 401);
+            return response(['message' => 'responses.already-registered'], 401);
         } else {
             Email::create([
                 'user_id' => $userId,
@@ -27,7 +27,7 @@ class EmailsController extends Controller
             $token = sha1($email);
             app()->setLocale($request['locale']);
             Mail::to($email)->send(new VerifySecondaryEmail($userId, $email, $token));
-            return response()->json(['message' => 'Email added successfully!']);
+            return response()->json(['message' => 'responses.email-added']);
         }
     }
 
@@ -38,12 +38,12 @@ class EmailsController extends Controller
         $email = $request->route('email');
         $user = auth()->user()->emails->where('email', $email)->first();
         if ($user->email_verified_at !== null) {
-            return response()->json(['message' => 'Your email has been verified already']);
+            return response()->json(['message' => 'responses.already-verified']);
         }
         if (sha1($email) === $token) {
             $user->email_verified_at = now();
             $user->save();
-            return response()->json(['message' => 'Your email was verified successfully!']);
+            return response()->json(['message' => 'responses.verified-success']);
         } else {
             throw new AuthorizationException();
         }
@@ -61,13 +61,13 @@ class EmailsController extends Controller
         $user->email = $email;
         $user->email_verified_at = $verificationDate;
         $user->save();
-        return response()->json(['message' => 'Your was successfully changed!']);
+        return response()->json(['message' => 'responses.change-primary']);
     }
 
     public function destroy(Request $request)
     {
         $email = $request['email'];
         Email::where('email', $email)->delete();
-        return response()->json(['message' => 'Successfully removed email.']);
+        return response()->json(['message' => 'responses.remove-email']);
     }
 }
