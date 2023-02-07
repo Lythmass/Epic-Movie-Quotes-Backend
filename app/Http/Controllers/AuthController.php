@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAuthRequest;
+use App\Models\Email;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -10,6 +12,11 @@ class AuthController extends Controller
     {
         $remember = $request['remember'];
         $attributes = $request->validated();
+
+        $checkSecondaryEmails = Email::where('email', $attributes['email'])->first();
+        if ($checkSecondaryEmails != null) {
+            $attributes['email'] = $checkSecondaryEmails->user->email;
+        }
 
         if (auth()->attempt($attributes, $remember)) {
             $request->session()->regenerate();
