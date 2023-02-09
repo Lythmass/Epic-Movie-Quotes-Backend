@@ -22,9 +22,9 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/reset', [PasswordResetController::class, 'update']);
 
     Route::post('/google-auth', [GoogleAuthController::class, 'login']);
+    Route::get('/google/redirect', [GoogleAuthController::class, 'index']);
+    Route::get('/google/callback', [GoogleAuthController::class, 'store']);
 });
-Route::get('/google/redirect', [GoogleAuthController::class, 'index']);
-Route::get('/google/callback', [GoogleAuthController::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/email/verify', [RegistrationController::class, 'sendEmailVerificationRequest']);
