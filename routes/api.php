@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailsController;
+use App\Http\Controllers\GenresController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilePictureController;
@@ -28,12 +30,17 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/email/verify', [RegistrationController::class, 'sendEmailVerificationRequest']);
-    Route::get('/get-user-data', [ProfileController::class, 'sendUserData']);
     Route::post('/post-user-data', [ProfileController::class, 'store']);
     Route::post('/add-new-email', [EmailsController::class, 'store']);
     Route::post('/delete-email', [EmailsController::class, 'destroy']);
     Route::post('/change-primary-email', [EmailsController::class, 'update']);
     Route::post('/upload-photo', [ProfilePictureController::class, 'store']);
+    Route::post('/upload-movie', [MoviesController::class, 'store']);
+    Route::post('/delete-movie', [MoviesController::class, 'destroy']);
+
+    Route::get('/get-user-data', [ProfileController::class, 'sendUserData']);
+    Route::get('/genres', [GenresController::class, 'index']);
+    Route::get('/movies', [MoviesController::class, 'index']);
 });
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');
