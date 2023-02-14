@@ -16,7 +16,8 @@ class Movie extends Model
         'thumbnail',
         'year',
         'director',
-        'budget'
+        'budget',
+        'user_id'
     ];
 
     public $translatable = [
@@ -28,6 +29,11 @@ class Movie extends Model
     public function quotes()
     {
         return $this->hasMany(Quote::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function genres()

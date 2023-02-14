@@ -8,6 +8,7 @@ use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilePictureController;
+use App\Http\Controllers\QuotesController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/get-user-data', [ProfileController::class, 'sendUserData']);
     Route::get('/genres', [GenresController::class, 'index']);
     Route::get('/movies', [MoviesController::class, 'index']);
+
+    Route::post('/upload-quote', [QuotesController::class, 'store']);
+    Route::post('/get-quotes', [QuotesController::class, 'index']);
 });
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');
