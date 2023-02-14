@@ -39,10 +39,9 @@ class MoviesController extends Controller
         ]);
 
         $genres = collect($attributes['genres']);
-        $genres->map(function ($genre) use ($movie) {
-            $findGenre = Genre::where('name', $genre)->first();
-            $movie->genres()->attach([$findGenre->id]);
-        });
+        $genres = collect($attributes['genres']);
+        $genreIds = Genre::whereIn('name', $genres)->pluck('id');
+        $movie->genres()->sync($genreIds);
 
         return response()->json(['message' => "movie-add"]);
     }
@@ -71,12 +70,11 @@ class MoviesController extends Controller
             'budget' => $attributes['budget'],
             'thumbnail' => asset('storage/' . $thumbnailName)
         ]);
+
         $movie->genres()->detach();
         $genres = collect($attributes['genres']);
-        $genres->map(function ($genre) use ($movie) {
-            $findGenre = Genre::where('name', $genre)->first();
-            $movie->genres()->attach([$findGenre->id]);
-        });
+        $genreIds = Genre::whereIn('name', $genres)->pluck('id');
+        $movie->genres()->sync($genreIds);
         return response()->json(['message' => "movie-update"]);
     }
 
