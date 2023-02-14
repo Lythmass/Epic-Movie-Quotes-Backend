@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/upload-photo', [ProfilePictureController::class, 'store']);
     Route::post('/upload-movie', [MoviesController::class, 'store']);
     Route::post('/delete-movie', [MoviesController::class, 'destroy']);
+    Route::post('/update-movie', [MoviesController::class, 'update']);
 
     Route::get('/get-user-data', [ProfileController::class, 'sendUserData']);
     Route::get('/genres', [GenresController::class, 'index']);
