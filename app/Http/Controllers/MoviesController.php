@@ -39,7 +39,6 @@ class MoviesController extends Controller
         ]);
 
         $genres = collect($attributes['genres']);
-        $genres = collect($attributes['genres']);
         $genreIds = Genre::whereIn('name', $genres)->pluck('id');
         $movie->genres()->sync($genreIds);
 
