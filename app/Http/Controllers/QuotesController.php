@@ -38,7 +38,7 @@ class QuotesController extends Controller
         $quoteId = $request['id'];
         $thumbnail = $request->file('thumbnail');
         $thumbnailName = $thumbnail->store('thumbnails');
-        Quote::where('quoteId', $quoteId)->update([
+        Quote::where('id', $quoteId)->update([
             'quote' => [
                 'en' => $attributes['quote-en'],
                 'ka' => $attributes['quote-ka'],
