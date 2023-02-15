@@ -46,6 +46,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/upload-quote', [QuotesController::class, 'store']);
     Route::post('/get-quotes', [QuotesController::class, 'index']);
+    Route::post('/update-quote', [QuotesController::class, 'update']);
+    Route::post('/delete-quote', [QuotesController::class, 'destroy']);
 });
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');
