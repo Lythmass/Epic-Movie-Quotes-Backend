@@ -12,7 +12,7 @@ class MoviesController extends Controller
 {
     public function index()
     {
-        return response()->json([['movies' => Movie::with('genres')->where('user_id', auth()->user()->id)->get()]]);
+        return response()->json([['movies' => Movie::with(['genres', 'quotes'])->where('user_id', auth()->user()->id)->get()]]);
     }
 
     public function store(StoreMovieRequest $request)
