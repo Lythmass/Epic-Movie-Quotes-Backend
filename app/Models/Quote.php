@@ -21,7 +21,7 @@ class Quote extends Model
         'quote',
     ];
 
-    public function movies()
+    public function movie()
     {
         return $this->belongsTo(Movie::class);
     }
