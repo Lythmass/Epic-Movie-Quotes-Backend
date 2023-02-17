@@ -7,8 +7,16 @@ use Illuminate\Http\Request;
 
 class NewsFeedController extends Controller
 {
-    public function index()
+    public function getNumberOfQuotes()
     {
-        return response()->json(['quotes' => Quote::with('movie')->get()]);
+        return response()->json(['length' => Quote::all()->count()]);
+    }
+
+    public function index(Request $request)
+    {
+        $startRange = $request['startRange'];
+        $endRange = $startRange + 2;
+        $quotes = Quote::with('movie')->latest()->skip($startRange)->take($endRange)->get();
+        return response()->json(['quotes' => $quotes]);
     }
 }
