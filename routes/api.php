@@ -5,6 +5,7 @@ use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\GenresController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\NewsFeedController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilePictureController;
@@ -48,6 +49,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/get-quotes', [QuotesController::class, 'index']);
     Route::post('/update-quote', [QuotesController::class, 'update']);
     Route::post('/delete-quote', [QuotesController::class, 'destroy']);
+
+    Route::get('/news-feed/quotes', [NewsFeedController::class, 'index']);
 });
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');
