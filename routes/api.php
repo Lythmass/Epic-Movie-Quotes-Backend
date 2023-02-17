@@ -50,7 +50,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/update-quote', [QuotesController::class, 'update']);
     Route::post('/delete-quote', [QuotesController::class, 'destroy']);
 
-    Route::get('/news-feed/quotes', [NewsFeedController::class, 'index']);
+    Route::post('/news-feed/quotes', [NewsFeedController::class, 'index']);
+    Route::get('/news-feed/number-of-quotes', [NewsFeedController::class, 'getNumberOfQuotes']);
 });
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');
