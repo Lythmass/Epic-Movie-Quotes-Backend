@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\EmailsController;
 use App\Http\Controllers\GenresController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\NewsFeedController;
 use App\Http\Controllers\PasswordResetController;
@@ -51,7 +53,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/delete-quote', [QuotesController::class, 'destroy']);
 
     Route::post('/news-feed/quotes', [NewsFeedController::class, 'index']);
+    Route::post('/news-feed/post', [NewsFeedController::class, 'store']);
     Route::get('/news-feed/number-of-quotes', [NewsFeedController::class, 'getNumberOfQuotes']);
+
+    Route::get('/news-feed/comments', [CommentsController::class, 'index']);
+    Route::post('/news-feed/post-comment', [CommentsController::class, 'store']);
+
+    Route::get('/news-feed/likes', [LikesController::class, 'index']);
+    Route::post('/news-feed/like', [LikesController::class, 'store']);
+    Route::post('/news-feed/unlike', [LikesController::class, 'destroy']);
 });
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');

@@ -26,8 +26,18 @@ class Quote extends Model
         return $this->belongsTo(Movie::class);
     }
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 }
