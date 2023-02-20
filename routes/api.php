@@ -8,6 +8,7 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\NewsFeedController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfilePictureController;
@@ -15,6 +16,9 @@ use App\Http\Controllers\QuotesController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Broadcast;
+
+Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -62,6 +66,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/news-feed/likes', [LikesController::class, 'index']);
     Route::post('/news-feed/like', [LikesController::class, 'store']);
     Route::post('/news-feed/unlike', [LikesController::class, 'destroy']);
+
+    Route::post('/notifications/get-messages', [NotificationsController::class, 'index']);
 });
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');

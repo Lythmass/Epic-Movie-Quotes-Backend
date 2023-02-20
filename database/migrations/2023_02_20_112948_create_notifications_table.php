@@ -12,7 +12,8 @@ return new class () extends Migration {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('author');
             $table->string('author_profile_picture');
-            $table->string('type');
+            $table->boolean('is_comment');
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
         });
     }

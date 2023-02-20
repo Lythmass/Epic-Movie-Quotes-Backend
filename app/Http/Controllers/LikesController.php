@@ -21,12 +21,14 @@ class LikesController extends Controller
             'user_id' => auth()->user()->id,
             'quote_id' =>  $request['quote_id'],
         ]);
-        $notification = (object)[
-            'user_id' => Quote::where('id', $like->quote_id)->pluck('user_id')->first(),
-            'author' => auth()->user()->id,
-            'author_profile_picture' => auth()->user()->profile_picture,
-            'type' => 'like'
-        ];
+        $profile_picture = auth()->user()->profile_picture != null ? auth()->user()->profile_picture : '/assets/images/tlotr.png';
+        $notification = Notification::create([
+            'user_id' => Quote::where('id', $request['quote_id'])->pluck('user_id')->first(),
+            'author' => auth()->user()->name,
+            'author_profile_picture' => $profile_picture,
+            'is_comment' => false,
+            'is_read' => false,
+        ]);
         event(new SendNotification($notification));
         return response()->json(['message' => $like->id]);
     }
