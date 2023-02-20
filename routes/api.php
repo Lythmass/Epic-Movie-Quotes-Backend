@@ -68,6 +68,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/news-feed/unlike', [LikesController::class, 'destroy']);
 
     Route::post('/notifications/get-messages', [NotificationsController::class, 'index']);
+    Route::post('/notifications/mark-all-as-read', [NotificationsController::class, 'update']);
 });
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');
