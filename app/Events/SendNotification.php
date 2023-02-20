@@ -26,6 +26,6 @@ class SendNotification implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PrivateChannel('notify.'.$this->notification->user_id);
+        return new PrivateChannel('App.Models.User.'.$this->notification->user_id);
     }
 }
