@@ -21,7 +21,6 @@ class RegistrationController extends Controller
             'password' => bcrypt($attributes['password']),
         ]);
         event(new Registered($attributes));
-        auth()->login($attributes);
         return response()->json(['message' => 'Registered Successfully!']);
     }
 
@@ -37,6 +36,7 @@ class RegistrationController extends Controller
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
+        auth()->logout();
         return response()->json(['message'=>'Successfully verified!']);
     }
 }

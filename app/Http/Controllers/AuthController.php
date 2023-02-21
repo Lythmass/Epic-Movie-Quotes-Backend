@@ -25,4 +25,12 @@ class AuthController extends Controller
 
         return response()->json(['error' => 'user-not-found'], 401);
     }
+
+    public function destroy()
+    {
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return response()->json(['message' => 'Logged out']);
+    }
 }
