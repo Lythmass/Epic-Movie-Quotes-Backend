@@ -13,4 +13,10 @@ class NotificationsController extends Controller
         $notifications = Notification::where('user_id', $user_id)->get();
         return response()->json(['notifications' => $notifications]);
     }
+
+    public function update()
+    {
+        Notification::where('user_id', auth()->user()->id)->update(['is_read' => true]);
+        return response()->json(['message' => 'nice']);
+    }
 }
