@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Refetch;
+use App\Events\SendLike;
 use App\Events\SendNotification;
 use App\Models\Like;
 use App\Models\Notification;
@@ -30,6 +32,7 @@ class LikesController extends Controller
             'is_read' => false,
         ]);
         event(new SendNotification($notification));
+        event(new Refetch('refetch-likes'));
         return response()->json(['message' => $like->id]);
     }
 

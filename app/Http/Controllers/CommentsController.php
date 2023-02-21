@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Refetch;
 use App\Events\SendNotification;
 use App\Http\Requests\StoreCommentRequest;
 use App\Models\Comment;
@@ -33,6 +34,7 @@ class CommentsController extends Controller
             'is_read' => false,
         ]);
         event(new SendNotification($notification));
+        event(new Refetch('refetch-comments'));
         return response()->json(['message' => 'comment-add']);
     }
 }
