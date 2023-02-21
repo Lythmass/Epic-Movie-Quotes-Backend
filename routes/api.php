@@ -70,6 +70,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/notifications/get-messages', [NotificationsController::class, 'index']);
     Route::post('/notifications/mark-all-as-read', [NotificationsController::class, 'update']);
 });
+Route::post('/logout', [AuthController::class, 'destroy']);
 
 Route::get('/email/verify/{id}/{hash}', [RegistrationController::class, 'verifyEmail'])->name('verification.verify');
 Route::get('/secondary-email/verify/{id}/{hash}/{email}', [EmailsController::class, 'verifyEmail']);
