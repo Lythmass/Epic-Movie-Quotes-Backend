@@ -67,7 +67,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/news-feed/like', [LikesController::class, 'store']);
     Route::post('/news-feed/unlike', [LikesController::class, 'destroy']);
 
-    Route::post('/notifications/get-messages', [NotificationsController::class, 'index']);
+    Route::get('/notifications/get-messages', [NotificationsController::class, 'index']);
     Route::post('/notifications/mark-all-as-read', [NotificationsController::class, 'update']);
 });
 Route::post('/logout', [AuthController::class, 'destroy']);
