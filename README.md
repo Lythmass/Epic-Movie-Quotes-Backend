@@ -3,7 +3,7 @@
 This repository is created for back-end side of "Epic Movies Quotes" project, where the user can create movies and add famous quotes to them, which will be posted in news feed for other people to see. 
 
 
-## Table of contents#
+## Table of contents
 * [Features](#features)
 * [Tech Stack](#tech-stack)
 * [Installation](#installation)
@@ -44,9 +44,7 @@ You can install my project by following instructions:
 ```
 
 ## Resources
-- [Spatie Translatable Package](https://spatie.be/docs/laravel-translatable/v6/introduction)
 - [Commit Rules](https://redberry.gitbook.io/resources/kodisa-da-proektis-shepasebis-kriteriumebi/proektisa-da-kodis-khariskhis-zogadi-kriteriumebi)
-- [Pusher](https://pusher.com/docs/)
 
 ## Database Structure
 [Click here to see the diagram](https://drawsql.app/teams/gigi/diagrams/epic-movies-quotes)
