@@ -8,36 +8,38 @@ use Spatie\Translatable\HasTranslations;
 
 class Quote extends Model
 {
-    use HasFactory;
-    use HasTranslations;
-    protected $fillable = [
-        'quote',
-        'thumbnail',
-        'movie_id',
-        'user_id'
-    ];
+	use HasFactory;
 
-    public $translatable = [
-        'quote',
-    ];
+	use HasTranslations;
 
-    public function movie()
-    {
-        return $this->belongsTo(Movie::class);
-    }
+	protected $fillable = [
+		'quote',
+		'thumbnail',
+		'movie_id',
+		'user_id',
+	];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+	public $translatable = [
+		'quote',
+	];
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
+	public function movie()
+	{
+		return $this->belongsTo(Movie::class);
+	}
 
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
-    }
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
+
+	public function comments()
+	{
+		return $this->hasMany(Comment::class);
+	}
+
+	public function likes()
+	{
+		return $this->hasMany(Like::class);
+	}
 }

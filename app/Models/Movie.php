@@ -8,36 +8,38 @@ use Spatie\Translatable\HasTranslations;
 
 class Movie extends Model
 {
-    use HasFactory;
-    use HasTranslations;
-    protected $fillable = [
-        'title',
-        'description',
-        'thumbnail',
-        'year',
-        'director',
-        'budget',
-        'user_id'
-    ];
+	use HasFactory;
 
-    public $translatable = [
-        'title',
-        'description',
-        'director',
-    ];
+	use HasTranslations;
 
-    public function quotes()
-    {
-        return $this->hasMany(Quote::class);
-    }
+	protected $fillable = [
+		'title',
+		'description',
+		'thumbnail',
+		'year',
+		'director',
+		'budget',
+		'user_id',
+	];
 
-    public function users()
-    {
-        return $this->belongsTo(User::class);
-    }
+	public $translatable = [
+		'title',
+		'description',
+		'director',
+	];
 
-    public function genres()
-    {
-        return $this->belongsToMany(Genre::class);
-    }
+	public function quotes()
+	{
+		return $this->hasMany(Quote::class);
+	}
+
+	public function users()
+	{
+		return $this->belongsTo(User::class);
+	}
+
+	public function genres()
+	{
+		return $this->belongsToMany(Genre::class);
+	}
 }
