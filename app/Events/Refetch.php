@@ -10,19 +10,21 @@ use Illuminate\Queue\SerializesModels;
 
 class Refetch implements ShouldBroadcast
 {
-    use Dispatchable;
-    use InteractsWithSockets;
-    use SerializesModels;
+	use Dispatchable;
 
-    public $refetch;
+	use InteractsWithSockets;
 
-    public function __construct($refetch)
-    {
-        $this->refetch = $refetch;
-    }
+	use SerializesModels;
 
-    public function broadcastOn()
-    {
-        return new Channel('refetch');
-    }
+	public $refetch;
+
+	public function __construct($refetch)
+	{
+		$this->refetch = $refetch;
+	}
+
+	public function broadcastOn()
+	{
+		return new Channel('refetch');
+	}
 }

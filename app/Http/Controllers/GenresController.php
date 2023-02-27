@@ -6,8 +6,8 @@ use App\Models\Genre;
 
 class GenresController extends Controller
 {
-    public function index()
-    {
-        return response()->json(['genres' => Genre::all(['name'])]);
-    }
+	public function index()
+	{
+		return response()->json(['genres' => Genre::all(['name'])]);
+	}
 }

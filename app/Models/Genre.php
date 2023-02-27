@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Genre extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $fillable = ['name'];
+	protected $fillable = ['name'];
 
-    public function movies()
-    {
-        return $this->belongsToMany(Movie::class);
-    }
+	public function movies()
+	{
+		return $this->belongsToMany(Movie::class);
+	}
 }
