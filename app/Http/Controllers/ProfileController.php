@@ -10,7 +10,7 @@ class ProfileController extends Controller
 {
 	public function sendUserData()
 	{
-		return response(['user-data' => auth()->user(), auth()->user()->emails]);
+		return response(['user-data' => auth()->user()->load('emails')]);
 	}
 
 	public function store(StoreUpdateRequest $request)
