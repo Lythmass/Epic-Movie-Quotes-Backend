@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 class GoogleAuthController extends Controller
 {
@@ -22,6 +23,12 @@ class GoogleAuthController extends Controller
 			return abort(401);
 		}
 		$username = $isRegistered !== null ? $isRegistered->name : $googleUser->name;
+		$username = Str::replace(' ', '1', $username);
+		if (strlen($username) > 15)
+		{
+			$username = Str::substr($username, 0, 16);
+		}
+		$username = Str::of($username)->lower();
 		$user = User::updateOrCreate(
 			['google_id' => $googleUser->id],
 			[
