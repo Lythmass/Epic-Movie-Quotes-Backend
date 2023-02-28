@@ -15,10 +15,16 @@ class Notification extends Model
 		'author_profile_picture',
 		'is_comment',
 		'is_read',
+		'quote_id',
 	];
 
 	public function user()
 	{
 		return $this->belongsTo(User::class);
+	}
+
+	public function quote()
+	{
+		return $this->belongsTo(Quote::class);
 	}
 }

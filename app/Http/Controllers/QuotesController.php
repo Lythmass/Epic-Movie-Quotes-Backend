@@ -14,6 +14,11 @@ class QuotesController extends Controller
 		return response()->json(['quotes' => Quote::where('user_id', auth()->user()->id)->where('movie_id', $movieId)->get()]);
 	}
 
+	public function allQuotes()
+	{
+		return response()->json(['quotes' => Quote::where('user_id', auth()->user()->id)->get()]);
+	}
+
 	public function store(StoreQuotesRequest $request)
 	{
 		$attributes = $request->validated();

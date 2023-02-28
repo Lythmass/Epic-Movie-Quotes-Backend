@@ -31,6 +31,7 @@ class CommentsController extends Controller
 			'author_profile_picture' => $profile_picture,
 			'is_comment'             => true,
 			'is_read'                => false,
+			'quote_id'               => $attributes['quote_id'],
 		]);
 		event(new SendNotification($notification));
 		event(new Refetch('refetch-comments'));
