@@ -25,12 +25,12 @@ class GoogleAuthController extends Controller
 		$user = User::updateOrCreate(
 			['google_id' => $googleUser->id],
 			[
-				'name'     => $username,
-				'email'    => $googleUser->email,
-				'password' => bcrypt(''),
+				'name'            => $username,
+				'email'           => $googleUser->email,
+				'password'        => bcrypt(''),
 			]
 		);
-
+		$user->profile_picture = $googleUser->getAvatar();
 		if ($user->email_verified_at === null)
 		{
 			$user->email_verified_at = now();
