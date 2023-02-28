@@ -55,6 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::post('/get-quotes', [QuotesController::class, 'index']);
 	Route::post('/update-quote', [QuotesController::class, 'update']);
 	Route::post('/delete-quote', [QuotesController::class, 'destroy']);
+	Route::get('/get-all-quotes', [QuotesController::class, 'allQuotes']);
 
 	Route::post('/news-feed/quotes', [NewsFeedController::class, 'index']);
 	Route::post('/news-feed/post', [NewsFeedController::class, 'store']);

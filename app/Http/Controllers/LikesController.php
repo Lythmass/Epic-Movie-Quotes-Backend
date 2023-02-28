@@ -29,6 +29,7 @@ class LikesController extends Controller
 			'author_profile_picture' => $profile_picture,
 			'is_comment'             => false,
 			'is_read'                => false,
+			'quote_id'               => $request['quote_id'],
 		]);
 		event(new SendNotification($notification));
 		event(new Refetch('refetch-likes'));
