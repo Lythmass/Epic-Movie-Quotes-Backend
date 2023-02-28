@@ -41,15 +41,27 @@ class QuotesController extends Controller
 	{
 		$attributes = $request->validated();
 		$quoteId = $request['id'];
-		$thumbnail = $request->file('thumbnail');
-		$thumbnailName = $thumbnail->store('thumbnails');
-		Quote::where('id', $quoteId)->update([
-			'quote' => [
-				'en' => $attributes['quote-en'],
-				'ka' => $attributes['quote-ka'],
-			],
-			'thumbnail' => asset('storage/' . $thumbnailName),
-		]);
+		if ($request->has('thumbnail'))
+		{
+			$thumbnail = $request->file('thumbnail');
+			$thumbnailName = $thumbnail->store('thumbnails');
+			Quote::where('id', $quoteId)->update([
+				'quote' => [
+					'en' => $attributes['quote-en'],
+					'ka' => $attributes['quote-ka'],
+				],
+				'thumbnail' => asset('storage/' . $thumbnailName),
+			]);
+		}
+		else
+		{
+			Quote::where('id', $quoteId)->update([
+				'quote' => [
+					'en' => $attributes['quote-en'],
+					'ka' => $attributes['quote-ka'],
+				],
+			]);
+		}
 
 		return response()->json(['message'=>'quote-update']);
 	}
